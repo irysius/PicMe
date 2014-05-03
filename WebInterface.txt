@@ -1,0 +1,21 @@
+Interface
+/account/login
+(username, password) => { result: boolean }
+
+/user/create
+(username, primaryemail, guardianemail) => { result: boolean, id: string }
+
+/user/create
+(username, primaryemail, guardianemail) => { result: boolean, id: string }
+
+/user/update
+(username, password, newprimaryemail, newguardianemail, newpassword) => { result: boolean }
+
+/image/create
+(userid, data, permissions) => { result: boolean, id: string }
+
+/image/get
+(userid) => { result: boolean, data: string[] }
+
+/permission/update
+(userid, imageid, permissions) => { result: boolean }
