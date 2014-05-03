@@ -8,11 +8,11 @@ user.post('/create', function (req, res, next) {
 	var password = req.params.password;
 
 	var result;
-	if (!password) {
+	//if (!password) {
 		result = database.createUser(username, email);
-	} else {
-		result = database.createUser(username, email, password);
-	}
+	// } else {
+	// 	result = database.createUser(username, email, password);
+	// }
 	res.json(result);
 })
 user.post('/update', function (req, res, next) {

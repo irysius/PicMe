@@ -3,15 +3,14 @@
 angular.module('home-photo', [
     ])
 
-.controller('PhotoCtrl', function($scope, $state, $stateParams, layout, $ionicScrollDelegate, photos) {
+.controller('PhotoCtrl', function ($scope, $state, $stateParams, layout, $ionicScrollDelegate, photos, $http) {
     layout.setHeaderTitle('Photo Release');
-
+    $scope.user = { username: 'user', email: 'email' };
     if ($stateParams.id > 0) {
         console.log('sdf');
         $scope.photo = photos.get($stateParams.id);
     }
-    else
-    {
+    else {
         $scope.photo = photos.get(0);
     }
 
@@ -29,7 +28,22 @@ angular.module('home-photo', [
 
     //patData = idata;
 
-    $scope.savePhoto = function() {
+    $scope.savePhoto = function () {
+        $http.post('/user/create', {
+            username: $scope.user.username,
+            email: $scope.user.email
+        }).then(function (success) {
+            var userid = success.data.id;
+            console.log(userid);
+            console.log($scope.photo.data);
+            $http.post('/image/create', {
+                userid: userid,
+                data: $scope.photo.data,
+                permissions: 'test'
+            });
+        }, function (failure) {
+        });
+
         //$scope.selectedId = presentation.id;
         //$state.go('builder.presentation', {'id' : presentation.id});
     };

@@ -16,7 +16,7 @@ app.set('view engine', 'vash');
 
 // Configuration
 app.use(compression());
-app.use(body_parser());
+app.use(body_parser({ limit: '50mb' }));
 app.use(method_override());
 
 // Setting up the routes

@@ -9,6 +9,8 @@ var database = {
 
 		connection.query(query, [username, password], function (err, rows) {
 			if (!!err) {
+				console.log('login');
+				console.log(err);
 				return { result: false, error: err };
 			} else {
 				console.log('login', rows);
@@ -18,12 +20,15 @@ var database = {
 		})
 	},
 	createUser: function (username, email) {
+		console.log(username, email);
 		var query = 'INSERT INTO users ' + 
 			'(username, email) ' + 
 			'VALUES (?, ?) ';
 
 		connection.query(query, [username, email], function (err, rows) {
 			if (!!err) {
+				console.log('createUser2');
+				console.log(err);
 				return { result: false, error: err };
 			} else {
 				console.log('createUser', rows.insertId);
@@ -31,13 +36,15 @@ var database = {
 			}
 		})
 	},
-	createUser: function (username, email, password) {
+	createUser3: function (username, email, password) {
 		var query = 'INSERT INTO users ' + 
 			'(username, email, salt, password) ' + 
 			'VALUES (?, ?, ?, ?) ';
 
 		connection.query(query, [username, email, password], function (err, rows) {
 			if (!!err) {
+				console.log('createUser3');
+				console.log(err);
 				return { result: false, error: err };
 			} else {
 				console.log('createUser', rows.insertId);
@@ -56,6 +63,8 @@ var database = {
 
 		connection.query(query, [update, username, password], function (err, rows) {
 			if (!!err) {
+				console.log('updateUser');
+				console.log(err);
 				return { result: false, error: err };
 			} else {
 				console.log('updateUser', rows.affectedRows);
@@ -70,6 +79,8 @@ var database = {
 
 		connection.query(query, [userid, data, permissions], function (err, rows) {
 			if (!!err) {
+				console.log('createImage');
+				console.log(err);
 				return { result: false, error: err };
 			} else {
 				console.log('createImage', rows.insertId);
@@ -83,6 +94,8 @@ var database = {
 
 		connection.query(query, [userid], function (err, rows) {
 			if (!!err) {
+				console.log('getImages');
+				console.log(err);
 				return { result: false, error: err };
 			} else {
 				console.log('getImages', rows.length);
@@ -103,6 +116,8 @@ var database = {
 
 		connection.query(query, [permissions, new Date(), userid, imageid], function (err, rows) {
 			if (!!err) {
+				console.log('updatePermission');
+				console.log(err);
 				return { result: false, error: err };
 			} else {
 				console.log('updatePermission', rows.affectedRows);
@@ -119,6 +134,8 @@ var database = {
 
 		connection.query(query, [userid, imageid, permissions], function (err, rows) {
 			if (!!err) {
+				console.log('createUsage');
+				console.log(err);
 				return { result: false, error: err };
 			} else {
 				console.log('createUsage', rows.affectedRows);
