@@ -1,0 +1,41 @@
+<ion-side-menus>
+    <ion-side-menu-content class="">
+        <ion-nav-view name="mainContent">
+        	<div class="home_content">
+                <i class="icon ion-camera"></i><p onclick="startCamera()">Tap here to take photo.</p>
+                <p>
+                    <video id="video" width="320" height="240" autoplay></video>
+                    <button id="snap">Snap Photo</button>
+                    <canvas id="canvas" width="320" height="240"></canvas>
+                    <button id="accept">Accept</button>
+                </p>
+
+            </div>
+
+        </ion-nav-view>
+    </ion-side-menu-content>
+
+    <ion-side-menu side="left" class="" ng-controller="HomeCtrl">
+        <ion-content delegate-handle="" has-bouncing="true" class="has-header has-subheader home_menu">
+            <ion-list>
+            <ul>
+            	<li><a href="#">Home</a></li>
+            	<li><a ui-sref="photo"><i class="icon ion-edit small_radius"></i> Take Photo</a></li>
+            	<li><a href="#"><i class="icon ion-ios7-copy small_radius"></i> Library</a></li>
+            	<li><a href="#"><i class="icon ion-document-text small_radius"></i> User Guide</a></li>
+            </ul>
+            </ion-list>            
+        </ion-content>
+
+		<!--
+        <div class="bar bar-stable item-input-inset" style="top:44px">
+            <div class="item-input-wrapper">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="Search" ng-model="searchQuery.name" ng-change="scrollContactListToTop()" />
+            </div>
+        </div>
+        -->
+        
+    </ion-side-menu>
+</ion-side-menus>
+
