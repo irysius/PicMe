@@ -2,7 +2,9 @@
 
 var app = angular.module('picme', [
     'ionic',
+    'webcam',
     'layout',
+    'photos',
     'home'
  ])
 .controller('IndexCtrl', function($scope, layout, $ionicModal, $ionicSideMenuDelegate) {//, jsonDataContacts, contacts, jsonDataPresentations, presentations) {
@@ -47,10 +49,11 @@ var app = angular.module('picme', [
     $stateProvider
         .state('home', {
             url: '/',
-            templateUrl: 'app/home/index.html'
+            templateUrl: 'app/home/index.html',
+            controller: 'HomeCtrl'
         })
         .state('home.photo', {
-            url: '/photo/',
+            url: '/photo',
             views: {
                 'mainContent': {
                     templateUrl: 'app/home/photo/accept.html',
@@ -58,6 +61,7 @@ var app = angular.module('picme', [
                 }
             }
         })
+
         .state('relate', {
             url: '/relate',
             templateUrl: 'app/relate/index.html'

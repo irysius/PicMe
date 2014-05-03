@@ -34,6 +34,8 @@ function startCamera() {
         context.drawImage(video, 0, 0, 320, 240);
 
 		var url = canvas.toDataURL();
+        var hiddenUrl = document.getElementById("dataUrl");
+        hiddenUrl.value = url;
 		//console.log(url);
 		// Set the src of the image url to the data url
 		//document.querySelector("#snapshot").src = url;
@@ -44,3 +46,4 @@ function startCamera() {
     });
 
 }
+
