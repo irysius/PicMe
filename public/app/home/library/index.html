@@ -1,0 +1,14 @@
+<br /><br /><br /><br />
+
+<ion-content>
+  <ion-infinite-scroll
+    on-infinite="loadMore()"
+    distance="1%">
+    <div id="photos" class="clearfix">
+      <div class="photo" ng-repeat="photo in photos.photos">
+        <img ng-src="{{ photo }}">
+      </div>
+    </div>
+  </ion-infinite-scroll>
+</ion-content>
+

@@ -6,8 +6,11 @@ angular.module('photos', [])
             get: function(id) {
                 return $filter('getById')(this.photos, id);
             },
-            add: function(patData) {
-            	var photo = { 'id': 0, 'idata': patData };
+            getAll: function() {
+            	return photos.photos;
+            },
+            add: function(pngBase64) {            	
+            	var photo = { 'id': 0, 'data': pngBase64 };
             	this.photos.push(photo);
             	return this.photos[0];
             }

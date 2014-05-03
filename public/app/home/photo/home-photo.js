@@ -23,7 +23,9 @@ angular.module('home-photo', [
     var ctxPat = patCanvas.getContext('2d');
 
     //var idata = getVideoData($scope.patOpts.x, $scope.patOpts.y, $scope.patOpts.w, $scope.patOpts.h);
-    ctxPat.putImageData($scope.photo.idata, 0, 0);
+    var image = new Image();
+    image.src = $scope.photo.data;
+    ctxPat.drawImage(image, 0, 0);
 
     //patData = idata;
 

@@ -60,29 +60,15 @@ var app = angular.module('picme', [
                 }
             }
         })
-
-        .state('relate', {
-            url: '/relate',
-            templateUrl: 'app/relate/index.html'
-        })
-        .state('relate.contact', {
-            url: '/contact/:id',
+        .state('home.library', {
+            url: '/library',
             views: {
                 'mainContent': {
-                    templateUrl: 'app/relate/contact/detail.html',
-                    controller: 'ContactCtrl'
+                    templateUrl: 'app/home/library/index.html',
+                    controller: 'LibraryCtrl'
                 }
             }
         })
-        .state('relate.conversation', {
-            url: '/conversation/:conversation_id?contact_id',
-            views: {
-                'mainContent': {
-                    templateUrl: 'app/relate/contact/conversation.html',
-                    controller: 'ConversationCtrl'
-                }
-            }
-        });
         
         $urlRouterProvider.otherwise("/");
         
