@@ -5,7 +5,9 @@ angular.module('home-photo', [
 
 .controller('PhotoCtrl', function ($scope, $state, $stateParams, layout, $ionicScrollDelegate, photos, $http) {
     layout.setHeaderTitle('Photo Release');
+    $scope.physicianid = 3001;
     $scope.user = { username: 'user', email: 'email' };
+    $scope.permissions = { one: true, two: true, three: true, four: true };
     if ($stateParams.id > 0) {
         console.log('sdf');
         $scope.photo = photos.get($stateParams.id);
@@ -36,10 +38,16 @@ angular.module('home-photo', [
             var userid = success.data.id;
             console.log(success);
             console.log($scope.photo.data);
+            var _permissions = '';
+            _permissions += $scope.permissions.one ? '1' : '0';
+            _permissions += $scope.permissions.two ? '1' : '0';
+            _permissions += $scope.permissions.three ? '1' : '0';
+            _permissions += $scope.permissions.four ? '1' : '0';
             $http.post('/image/create', {
+                physicianid: $scope.physicianid,
                 userid: userid,
                 data: $scope.photo.data,
-                permissions: 'test'
+                permissions: _permissions
             });
         }, function (failure) {
         });
