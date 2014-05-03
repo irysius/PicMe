@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Pic Me!</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+  <base href="/">
+
+  <link rel="stylesheet" href="styles/app.css"/>
+  <!--
+  <script src="cordova.js"></script>
+  <script src="cordova_plugins.js"></script>
+  -->
+
+  <script src="common/js/ionic.bundle.js"></script>
+  
+
+  <script src="app/app.js"></script>
+  <script src="app/home/home.js"></script>
+  
+  <script src="app/resources/layout.js"></script>
+
+</head>
+
+<body ng-controller="IndexCtrl">
+
+<div class="initialization" ng-if="initialLoad">
+    <p>Pic Me! is loading...</p>
+</div>
+
+<div ng-cloak class="bar relate_navbar">
+    <button class="button button-clear icon ion-navicon-round" ng-click="showMenu()"></button>
+    <h1 class="title" ng-bind="layout.getHeaderTitle()"></h1>
+    <button class="button button-clear icon ion-home" ng-click="showModal()"></button>
+</div>
+
+<ion-nav-view scroll="true"></ion-nav-view>
+
+</body>
+
+</html>
