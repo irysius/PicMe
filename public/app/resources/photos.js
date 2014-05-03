@@ -13,6 +13,10 @@ angular.module('photos', [])
             	var photo = { 'id': 0, 'data': pngBase64 };
             	this.photos.push(photo);
             	return this.photos[0];
+            },
+            clear: function() {
+                photos = [];
+                return true;
             }
         };
 });

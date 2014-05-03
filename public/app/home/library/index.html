@@ -1,14 +1,19 @@
 <br /><br /><br /><br />
 
 <ion-content>
-  <ion-infinite-scroll
-    on-infinite="loadMore()"
-    distance="1%">
+    <ion-list>
     <div id="photos" class="clearfix">
-      <div class="photo" ng-repeat="photo in photos.photos">
-        <img ng-src="{{ photo }}">
+      <div class="photo" ng-repeat="photo in photos">
+        <!--<img ng-src="{{ photo }}">-->
+        {{ photo }}
+        <br /><br />
       </div>
     </div>
+    </ion-list>            
+  <ion-infinite-scroll
+    ng-if="moreDataCanBeLoaded"
+    on-infinite="loadMoreData()"
+    distance="1%">
   </ion-infinite-scroll>
 </ion-content>
 
