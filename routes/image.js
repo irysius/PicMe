@@ -1,5 +1,6 @@
 var express = require('express');
 var image = express.Router();
+var nodemailer = require('nodemailer');
 var database = require('./../model/database');
 
 image.post('/create', function (req, res, next) {
@@ -8,7 +9,31 @@ image.post('/create', function (req, res, next) {
 	var permissions = req.body.permissions;
 
 	database.createImage(userid, data, permissions, function (result) {
-		res.json(result);
+		if (!result.result) res.json(result);
+		database.getUser(userid, function (result2) {
+			console.log('createImage getUser');
+			console.log(userid);
+			console.log(result2);
+			var transport = nodemailer.createTransport('SMTP', {
+				service: "Gmail",
+				auth: {
+					user: "username",
+					pass: "password"
+				}
+			});
+			var mailOptions = {
+				from: 'test@test.com',
+				to: result2.email,
+				subject: 'Medical Image Alert',
+				text: 'You have just allowed a physician to use your picture for the following purposes...'
+			}
+			transport.sendMail(mailOptions, function(error, responseStatus) {
+				console.log('mail return');
+				console.log(error);
+				console.log(responseStatus);
+			});
+			res.json(result);
+		});
 	});
 })
 

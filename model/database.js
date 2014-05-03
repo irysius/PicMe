@@ -24,12 +24,12 @@ var database = {
 	createUser: function (username, email, callback) {
 		console.log(username, email);
 		var select = 'SELECT * FROM users ' + 
-			'WHERE username = ? ';
+			'WHERE email = ? ';
 		var insert = 'INSERT INTO users ' + 
 			'(username, email) ' + 
 			'VALUES (?, ?) ';
 
-		connection.query(select, [username], function (err, rows) {
+		connection.query(select, [email], function (err, rows) {
 			if (!!err) {
 				console.log('createUser2Select');
 				console.log(err);
@@ -47,6 +47,7 @@ var database = {
 						}
 					})
 				} else {
+					console.log(rows[0]);
 					callback({ result: true, id: rows[0].userid });
 				}
 			}
@@ -89,6 +90,23 @@ var database = {
 			}
 		})
 	},
+	getUser: function (userid, callback) {
+		var query = 'SELECT * FROM users ' + 
+			'WHERE userid = ? ';
+
+		connection.query(query, [userid], function (err, rows) {
+			if (!!err) {
+				console.log('getUser');
+				console.log(err);
+			} else {
+				if (rows.length == 0) {
+					callback({ result: false });
+				} else {
+					callback({ result: true, data: row[0] });
+				}
+			}
+		})
+	},
 	createImage: function (userid, data, permissions, callback) {
 		var query = 'INSERT INTO images ' + 
 			'(userid, permissions) ' + 
@@ -105,7 +123,9 @@ var database = {
 				fs.writeFile(dataFolder + rows.insertId + '.txt', data, function (err) {
 					console.log('saving file');
 					if (err) console.log(err);
-					else callback({ result: true, id: rows.insertId });
+					else {
+						callback({ result: true, id: rows.insertId })
+					};
 				})
 			}
 		})
