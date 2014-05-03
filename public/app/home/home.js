@@ -6,6 +6,7 @@ angular.module('home', [
 ])
 .controller('HomeCtrl', function($scope, $state, layout, $ionicScrollDelegate, photos) {
     layout.setHeaderTitle('Home');
+    photos.clear();
 
     var _video = null,
     	patData = null;
