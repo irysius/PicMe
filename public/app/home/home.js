@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('home', [
+	'home-library',
 	'home-photo'
 ])
 .controller('HomeCtrl', function($scope, $state, layout, $ionicScrollDelegate, photos) {
@@ -10,7 +11,9 @@ angular.module('home', [
     	patData = null;
 	
     $scope.goToAccept = function() {
-    	photos.add(patData);
+        var patCanvas = document.querySelector('#snapshot');
+    	var pngBase64 = patCanvas.toDataURL("image/png");        
+        photos.add(pngBase64);
         $state.go('home.photo');
     };
 
@@ -39,6 +42,7 @@ angular.module('home', [
             ctxPat.putImageData(idata, 0, 0);
 
             patData = idata;
+            console.log(idata);
         }
     };
 
