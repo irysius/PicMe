@@ -23,20 +23,35 @@ var database = {
 	},
 	createUser: function (username, email, callback) {
 		console.log(username, email);
-		var query = 'INSERT INTO users ' + 
+		var select = 'SELECT * FROM users ' + 
+			'WHERE username = ? ';
+		var insert = 'INSERT INTO users ' + 
 			'(username, email) ' + 
 			'VALUES (?, ?) ';
 
-		connection.query(query, [username, email], function (err, rows) {
+		connection.query(select, [username], function (err, rows) {
 			if (!!err) {
-				console.log('createUser2');
+				console.log('createUser2Select');
 				console.log(err);
 				callback({ result: false, error: err });
 			} else {
-				console.log('createUser', rows.insertId);
-				callback({ result: true, id: rows.insertId });
+				if (rows.length == 0) {
+					connection.query(insert, [username, email], function (err2, rows2) {
+						if (!!err2) {
+							console.log('createUser2Insert');
+							console.log(err2);
+							callback({ result: false, error: err2 });
+						} else {
+							console.log('createUser', rows2.insertId);
+							callback({ result: true, id: rows2.insertId });
+						}
+					})
+				} else {
+					callback({ result: true, id: rows[0].userid });
+				}
 			}
 		})
+		
 	},
 	createUser3: function (username, email, password, callback) {
 		var query = 'INSERT INTO users ' + 
@@ -96,10 +111,9 @@ var database = {
 		})
 	},
 	getImages: function (userid, callback) {
-		var query = 'SELECT * FROM images ' + 
-			'WHERE userid = ? ';
+		var query = 'SELECT * FROM images ';
 
-		connection.query(query, [userid], function (err, rows) {
+		connection.query(query, function (err, rows) {
 			if (!!err) {
 				console.log('getImages');
 				console.log(err);
