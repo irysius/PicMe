@@ -3,16 +3,17 @@
 angular.module('home-photo', [
     ])
 
-.controller('PhotoCtrl', function($scope, $state, $stateParams, layout, $ionicScrollDelegate, photo) {
+.controller('PhotoCtrl', function($scope, $state, $stateParams, layout, $ionicScrollDelegate, photos) {
     layout.setHeaderTitle('Photo Release');
 
     if ($stateParams.id > 0) {
-        $scope.presentation = presentations.get($stateParams.id);
+        console.log('sdf');
+        $scope.photo = photos.get($stateParams.id);
     }
     else
     {
-        $scope.presentation = [];
-        $scope.presentation.id = 0;
+        console.log('len:' + photos.length);
+        $scope.photo = photos.get(0);
     }
 
     $scope.savePhoto = function() {
