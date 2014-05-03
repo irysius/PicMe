@@ -1,7 +1,17 @@
 <ion-side-menus>
     <ion-side-menu-content class="">
         <ion-nav-view name="mainContent">
-        	<div class="home_content"><i class="icon ion-arrow-left-c"></i><p>Tap here to access left menu.</p></div>
+        	<div class="home_content">
+                <i class="icon ion-camera"></i><p onclick="startCamera()">Tap here to take photo.</p>
+                <p>
+                    <video id="video" width="320" height="240" autoplay></video>
+                    <button id="snap">Snap Photo</button>
+                    <canvas id="canvas" width="320" height="240"></canvas>
+                    <button id="accept">Accept</button>
+                </p>
+
+            </div>
+
         </ion-nav-view>
     </ion-side-menu-content>
 
@@ -28,3 +38,4 @@
         
     </ion-side-menu>
 </ion-side-menus>
+

@@ -49,6 +49,15 @@ var app = angular.module('picme', [
             url: '/',
             templateUrl: 'app/home/index.html'
         })
+        .state('home.photo', {
+            url: '/photo/',
+            views: {
+                'mainContent': {
+                    templateUrl: 'app/home/photo/accept.html',
+                    controller: 'PhotoCtrl'
+                }
+            }
+        })
         .state('relate', {
             url: '/relate',
             templateUrl: 'app/relate/index.html'
