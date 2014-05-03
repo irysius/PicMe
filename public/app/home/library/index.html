@@ -1,12 +1,9 @@
-<br /><br /><br /><br />
-
 <ion-content>
+    <br /><br />
     <ion-list>
     <div id="photos" class="clearfix">
       <div class="photo" ng-repeat="photo in photos">
-        <!--<img ng-src="{{ photo }}">-->
-        {{ photo }}
-        <br /><br />
+        <img ng-src="{{ photo.data }}">
       </div>
     </div>
     </ion-list>            

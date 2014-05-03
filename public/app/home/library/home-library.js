@@ -6,21 +6,26 @@ angular.module('home-library', [
 .controller('LibraryCtrl', function($scope, $http, $state, $stateParams, layout, $ionicScrollDelegate, photos) {
     layout.setHeaderTitle('Photo Library');
 
-	$scope.photos = photos.photos;
+	//$scope.photos = photos.photos;
 
     $scope.photos = getData(); 
 
 	function getData() {
         var a = [];
-        for (var i=1; i< 20; i++) {
-            a.push(i);
-        }
-            
+
+        $http.get('/image').success(function (data) {
+        	console.log('data:' + data.data.length);
+        	for (var i = 0; i < data.data.length; i++) {
+        		var photo = { 'id': data.data[i].imageid, 'data': data.data[i].data };
+            	a.push(photo);            	
+        	}
+        });
+
         return a;
       }
 
 
-	$scope.moreDataCanBeLoaded = true;
+	$scope.moreDataCanBeLoaded = false;
 
 	$scope.loadMoreData = function() {
   	    //$http.get('/more-items').success(function(items) {
@@ -28,10 +33,8 @@ angular.module('home-library', [
 			//for(var i=0, l=items.length; i < l; i++) {
 			//	$scope.photos.push(items[i]);
 			//}
-console.log('currentsize:' + $scope.photos.length);
 
 			for(var i= ($scope.photos.length + 1), l = $scope.photos.length; i < (l + 10); i++) {
-console.log('dfsdfsf:' + $scope.photos.length + '   ' + i);
 				$scope.photos.push(i);
 			}
 
@@ -39,7 +42,6 @@ console.log('dfsdfsf:' + $scope.photos.length + '   ' + i);
 		      	$scope.moreDataCanBeLoaded = false;
 		    }
 
-console.log('currentsize2:' + $scope.photos.length);
 	    	$scope.$broadcast('scroll.infiniteScrollComplete');
 	    //});
 
