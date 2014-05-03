@@ -1,0 +1,24 @@
+{
+  "name": "picme",
+  "version": "0.0.0",
+  "description": "Physican personal image repository with permissions",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/irysius/PicMe"
+  },
+  "keywords": [
+    "physician",
+    "image",
+    "permissions"
+  ],
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/irysius/PicMe/issues"
+  },
+  "homepage": "https://github.com/irysius/PicMe"
+}
