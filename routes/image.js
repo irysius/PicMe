@@ -14,15 +14,16 @@ image.post('/create', function (req, res, next) {
 			console.log('createImage getUser');
 			console.log(userid);
 			console.log(result2);
+			//var transport = nodemailer.createTransport('Direct');
 			var transport = nodemailer.createTransport('SMTP', {
-				service: "Gmail",
+				service: 'Gmail',
 				auth: {
-					user: "username",
-					pass: "password"
+					user: 'pickmehhsickkids@gmail.com',
+					pass: 'pickme123'
 				}
-			});
+			})
 			var mailOptions = {
-				from: 'test@test.com',
+				from: 'pickmehhsickkids@gmail.com',
 				to: result2.data.email,
 				subject: 'Medical Image Alert',
 				text: 'You have just allowed a physician to use your picture for the following purposes...'
