@@ -20,5 +20,14 @@
   "bugs": {
     "url": "https://github.com/irysius/PicMe/issues"
   },
-  "homepage": "https://github.com/irysius/PicMe"
+  "homepage": "https://github.com/irysius/PicMe",
+  "dependencies": {
+    "express": "4.0.x",
+    "vash": "0.7.x",
+    "compression": "1.0.x",
+    "errorhandler": "1.0.x",
+    "body-parser": "1.0.x",
+    "method-override": "1.0.x",
+    "mysql": "2.2.x"
+  }
 }

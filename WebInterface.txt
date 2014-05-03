@@ -1,6 +1,6 @@
 Interface
 /account/login
-(username, password) => { result: boolean }
+(username, password) => { result: boolean, data: user }
 
 /user/create
 (username, primaryemail, guardianemail) => { result: boolean, id: string }
@@ -14,8 +14,11 @@ Interface
 /image/create
 (userid, data, permissions) => { result: boolean, id: string }
 
-/image/get
+GET: /image
 (userid) => { result: boolean, data: string[] }
 
 /permission/update
+(userid, imageid, permissions) => { result: boolean }
+
+/usage/update
 (userid, imageid, permissions) => { result: boolean }
