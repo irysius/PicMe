@@ -23,10 +23,11 @@ image.post('/create', function (req, res, next) {
 			});
 			var mailOptions = {
 				from: 'test@test.com',
-				to: result2.email,
+				to: result2.data.email,
 				subject: 'Medical Image Alert',
 				text: 'You have just allowed a physician to use your picture for the following purposes...'
 			}
+			console.log(mailOptions);
 			transport.sendMail(mailOptions, function(error, responseStatus) {
 				console.log('mail return');
 				console.log(error);
@@ -40,9 +41,17 @@ image.post('/create', function (req, res, next) {
 image.get('/', function (req, res, next) {
 	var userid = parseInt(req.query.userid);
 	
-	var result = database.getImages(userid, function (result) {
+	database.getImages(userid, function (result) {
 		res.json(result);
 	});
+})
+
+image.get('/:imageid(\\d+)', function (req, res, next) {
+	var imageid = req.params.imageid;
+
+	database.getImage(imageid, function (result) {
+		res.json(result);
+	})
 })
 
 module.exports = image;

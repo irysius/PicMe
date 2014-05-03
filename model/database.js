@@ -102,7 +102,7 @@ var database = {
 				if (rows.length == 0) {
 					callback({ result: false });
 				} else {
-					callback({ result: true, data: row[0] });
+					callback({ result: true, data: rows[0] });
 				}
 			}
 		})
@@ -150,6 +150,27 @@ var database = {
 					r.push(row);
 				}
 				callback({ result: true, data: r });
+			}
+		})
+	},
+	getImage: function (imageid, callback) {
+		var query = 'SELECT * FROM images WHERE imageid = ? ';
+
+		connection.query(query, [imageid], function (err, rows) {
+			if (!!err) {
+				console.log('getImage');
+				console.log(err);
+				callback({ result: false, error: err });
+			} else {
+				console.log('getImage', rows.length);
+				if (rows.length == 0) callback({ result: false });
+				else {
+					var row = rows[0];
+					var filename = dataFolder + row.imageid + '.txt';
+					var text = fs.readFileSync(filename, 'utf8');
+					row.data = text;
+					callback({ result: true, data: row });
+				}
 			}
 		})
 	},
