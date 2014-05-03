@@ -4,6 +4,7 @@ var user = new express.Router();
 
 user.post('/create', function (req, res, next) {
 	var username = req.params.username;
+	var email = req.params.email;
 	var password = req.params.password;
 
 	var result;
