@@ -2,26 +2,27 @@ var express = require('express');
 var database = require('./../model/database');
 var user = new express.Router();
 
-user.post('/create', function (req, res, next) {
-	var username = req.params.username;
-	var email = req.params.email;
-	var password = req.params.password;
+user.post('/create', function (req, res, next) {	
+	var username = req.body.username;
+	var email = req.body.email;
+	var password = req.body.password;
 
-	var result;
 	//if (!password) {
-		result = database.createUser(username, email);
+	database.createUser(username, email, function (result) {
+		res.json(result);
+	});
 	// } else {
 	// 	result = database.createUser(username, email, password);
 	// }
-	res.json(result);
 })
 user.post('/update', function (req, res, next) {
-	var username = req.params.username;
-	var password = req.params.password;
-	var newemail = req.params.newemail;
-	var newpassword = req.params.newpassword;
-	var result = database.updateUser(username, password, newemail, newpassword);
-	res.json(result);
+	var username = req.body.username;
+	var password = req.body.password;
+	var newemail = req.body.newemail;
+	var newpassword = req.body.newpassword;
+	database.updateUser(username, password, newemail, newpassword, function (result) {
+		res.json(result);
+	});
 })
 
 module.exports = user;

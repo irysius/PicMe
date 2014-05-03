@@ -34,7 +34,7 @@ angular.module('home-photo', [
             email: $scope.user.email
         }).then(function (success) {
             var userid = success.data.id;
-            console.log(userid);
+            console.log(success);
             console.log($scope.photo.data);
             $http.post('/image/create', {
                 userid: userid,

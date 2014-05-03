@@ -3,11 +3,12 @@ var database = require('./../model/database');
 var usage = new express.Router();
 
 usage.post('/create', function (req, res, next) {
-	var userid = req.params.userid;
-	var imageid = req.params.imageid;
-	var permissions = req.params.permissions;
+	var userid = parseInt(req.body.userid);
+	var imageid = parseInt(req.body.imageid);
+	var permissions = req.body.permissions;
 
-	var result = database.createUsage(userid, imageid, permissions);
-	res.json(result);
+	database.createUsage(userid, imageid, permissions, function (result) {
+		res.json(result);
+	});
 })
 module.exports = usage;

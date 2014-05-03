@@ -1,9 +1,11 @@
 var mysql = require('mysql');
+var fs = require('fs');
 var connectionString = 'mysql://mypic:mypic123@localhost/mypic';
 var connection = mysql.createConnection(connectionString);
+var dataFolder = 'data/';
 
 var database = {
-	login: function (username, password) {
+	login: function (username, password, callback) {
 		var query = 'SELECT * FROM users ' + 
 			'WHERE username = ? AND password = ? ';
 
@@ -11,15 +13,15 @@ var database = {
 			if (!!err) {
 				console.log('login');
 				console.log(err);
-				return { result: false, error: err };
+				callback({ result: false, error: err });
 			} else {
 				console.log('login', rows);
 				var id = rows[0]['userid'];
-				return { result: true, id: id };
+				callback({ result: true, id: id });
 			}
 		})
 	},
-	createUser: function (username, email) {
+	createUser: function (username, email, callback) {
 		console.log(username, email);
 		var query = 'INSERT INTO users ' + 
 			'(username, email) ' + 
@@ -29,14 +31,14 @@ var database = {
 			if (!!err) {
 				console.log('createUser2');
 				console.log(err);
-				return { result: false, error: err };
+				callback({ result: false, error: err });
 			} else {
 				console.log('createUser', rows.insertId);
-				return { result: true, id: rows.insertId };
+				callback({ result: true, id: rows.insertId });
 			}
 		})
 	},
-	createUser3: function (username, email, password) {
+	createUser3: function (username, email, password, callback) {
 		var query = 'INSERT INTO users ' + 
 			'(username, email, salt, password) ' + 
 			'VALUES (?, ?, ?, ?) ';
@@ -45,14 +47,14 @@ var database = {
 			if (!!err) {
 				console.log('createUser3');
 				console.log(err);
-				return { result: false, error: err };
+				callback({ result: false, error: err });
 			} else {
 				console.log('createUser', rows.insertId);
-				return { result: true, id: rows.insertId };
+				callback({ result: true, id: rows.insertId });
 			}
 		})
 	},
-	updateUser: function (username, password, newemail, newpassword) {
+	updateUser: function (username, password, newemail, newpassword, callback) {
 		var query = 'UPDATE users ' + 
 			'SET ? ' + 
 			'WHERE username = ? AND password = ? ';
@@ -65,30 +67,35 @@ var database = {
 			if (!!err) {
 				console.log('updateUser');
 				console.log(err);
-				return { result: false, error: err };
+				callback({ result: false, error: err });
 			} else {
 				console.log('updateUser', rows.affectedRows);
-				return { result: rows.affectedRows > 0 };
+				callback({ result: rows.affectedRows > 0 });
 			}
 		})
 	},
-	createImage: function (userid, data, permissions) {
+	createImage: function (userid, data, permissions, callback) {
 		var query = 'INSERT INTO images ' + 
-			'(userid, data, permissions) ' + 
-			'(?, ?, ?) ';
-
-		connection.query(query, [userid, data, permissions], function (err, rows) {
+			'(userid, permissions) ' + 
+			'VALUES (?, ?) ';
+		console.log(userid);
+		console.log(permissions);
+		connection.query(query, [userid, permissions], function (err, rows) {
 			if (!!err) {
 				console.log('createImage');
 				console.log(err);
-				return { result: false, error: err };
+				callback({ result: false, error: err });
 			} else {
 				console.log('createImage', rows.insertId);
-				return { result: true, id: rows.insertId };
+				fs.writeFile(dataFolder + rows.insertId + '.txt', data, function (err) {
+					console.log('saving file');
+					if (err) console.log(err);
+					else callback({ result: true, id: rows.insertId });
+				})
 			}
 		})
 	},
-	getImages: function (userid) {
+	getImages: function (userid, callback) {
 		var query = 'SELECT * FROM images ' + 
 			'WHERE userid = ? ';
 
@@ -96,20 +103,23 @@ var database = {
 			if (!!err) {
 				console.log('getImages');
 				console.log(err);
-				return { result: false, error: err };
+				callback({ result: false, error: err });
 			} else {
 				console.log('getImages', rows.length);
 				var i = 0;
 				var r = [];
 				for (; i < rows.length; ++i) {
 					var row = rows[i];
+					var filename = dataFolder + row.imageid + '.txt';
+					var text = fs.readFileSync(filename, 'utf8');
+					row.data = text;
 					r.push(row);
 				}
-				return { result: true, data: r };
+				callback({ result: true, data: r });
 			}
 		})
 	},
-	updatePermission: function (userid, imageid, permissions) {
+	updatePermission: function (userid, imageid, permissions, callback) {
 		var query = 'UPDATE images ' + 
 			'SET permission = ?, updated = ? ' + 
 			'WHERE userid = ? AND imageid = ? ';
@@ -118,16 +128,16 @@ var database = {
 			if (!!err) {
 				console.log('updatePermission');
 				console.log(err);
-				return { result: false, error: err };
+				callback({ result: false, error: err });
 			} else {
 				console.log('updatePermission', rows.affectedRows);
-				return { result: rows.affectedRows > 0 };
+				callback({ result: rows.affectedRows > 0 });
 			}
 		})
 
 		return { result: false };
 	},
-	createUsage: function (userid, imageid, permissions) {
+	createUsage: function (userid, imageid, permissions, callback) {
 		var query = 'INSERT INTO usage ' + 
 			'(userid, imageid, permissions) ' + 
 			'VALUES (?, ?, ?) ';
@@ -136,10 +146,10 @@ var database = {
 			if (!!err) {
 				console.log('createUsage');
 				console.log(err);
-				return { result: false, error: err };
+				callback({ result: false, error: err });
 			} else {
 				console.log('createUsage', rows.affectedRows);
-				return { result: rows.affectedRows > 0 };
+				callback({ result: rows.affectedRows > 0 });
 			}
 		})
 	}

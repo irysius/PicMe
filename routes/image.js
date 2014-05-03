@@ -3,19 +3,21 @@ var image = express.Router();
 var database = require('./../model/database');
 
 image.post('/create', function (req, res, next) {
-	var userid = req.params.userid;
-	var data = req.params.data;
-	var permissions = req.params.permissions;
+	var userid = parseInt(req.body.userid);
+	var data = req.body.data;
+	var permissions = req.body.permissions;
 
-	var result = database.createImage(userid, data, permissions);
-	res.json(result);
+	database.createImage(userid, data, permissions, function (result) {
+		res.json(result);
+	});
 })
 
 image.get('/', function (req, res, next) {
-	var userid = req.query.userid;
+	var userid = parseInt(req.query.userid);
 	
-	var result = database.getImages(userid);
-	res.json(result);
+	var result = database.getImages(userid, function (result) {
+		res.json(result);
+	});
 })
 
 module.exports = image;

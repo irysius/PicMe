@@ -6,8 +6,9 @@ account.post('/login', function (req, res, next) {
 	var username = req.params.username;
 	var password = req.params.password;
 
-	var result = database.login(username, password);
-	res.json(result);
+	database.login(username, password, function (result) {
+		res.json(result);
+	});
 })
 
 module.exports = account;
