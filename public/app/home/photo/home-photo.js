@@ -51,9 +51,6 @@ angular.module('home-photo', [
             });
         }, function (failure) {
         });
-
-        //$scope.selectedId = presentation.id;
-        //$state.go('builder.presentation', {'id' : presentation.id});
     };
 })
 ;

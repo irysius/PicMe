@@ -48,11 +48,11 @@ var app = angular.module('picme', [
     $stateProvider
         .state('home', {
             url: '/',
-            templateUrl: 'app/home/index.html',
-            controller: 'HomeCtrl'
+            templateUrl: 'app/home/index.html'
         })
+
         .state('home.photo', {
-            url: '/photo',
+            url: 'photo',
             views: {
                 'mainContent': {
                     templateUrl: 'app/home/photo/accept.html',
@@ -61,7 +61,7 @@ var app = angular.module('picme', [
             }
         })
         .state('home.library', {
-            url: '/library',
+            url: 'library',
             views: {
                 'mainContent': {
                     templateUrl: 'app/home/library/index.html',

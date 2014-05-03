@@ -1,0 +1,10 @@
+<div class="home_content">
+    <p>
+        <br />
+        <button class="button button-positive" ng-click="makeSnapshot()">Take Photo</button>
+        <button class="button button-positive" id="accept" ng-click="goToAccept()">Accept</button>                
+        <webcam on-streaming="onSuccess(video)"></webcam>
+        <canvas id="snapshot"></canvas>
+    </p>
+
+</div>
