@@ -12,9 +12,20 @@ angular.module('home-photo', [
     }
     else
     {
-        console.log('len:' + photos.length);
         $scope.photo = photos.get(0);
     }
+
+    var patCanvas = document.querySelector('#snapshot');
+    if (!patCanvas) return;
+
+    //patCanvas.width = _video.width;
+    //patCanvas.height = _video.height;
+    var ctxPat = patCanvas.getContext('2d');
+
+    //var idata = getVideoData($scope.patOpts.x, $scope.patOpts.y, $scope.patOpts.w, $scope.patOpts.h);
+    ctxPat.putImageData($scope.photo.idata, 0, 0);
+
+    //patData = idata;
 
     $scope.savePhoto = function() {
         //$scope.selectedId = presentation.id;

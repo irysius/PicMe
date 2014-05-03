@@ -7,7 +7,7 @@ angular.module('photos', [])
                 return $filter('getById')(this.photos, id);
             },
             add: function(patData) {
-            	var photo = { 'id': 0, 'height': patData.height, 'width': patData.width, 'data': patData.data };
+            	var photo = { 'id': 0, 'idata': patData };
             	this.photos.push(photo);
             	return this.photos[0];
             }

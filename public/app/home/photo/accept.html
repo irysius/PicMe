@@ -2,7 +2,35 @@
 
 <div>
 	<canvas id="snapshot"></canvas>
-	<img src="{{photo.url}}" />
+
     <br /><br />
-    Show the photo and capture patient details/permissions.
+    Email: <input type="text" ng-model="user.email" />
+
+    <ul class="list">
+    	<li class="item item-checkbox">
+           <label class="checkbox">
+             <input type="checkbox" checked="" style="padding: 0px">
+           </label>
+           Direct Clinical Care
+        </li>
+    	<li class="item item-checkbox">
+           <label class="checkbox">
+             <input type="checkbox" checked="" style="padding: 0px">
+           </label>
+           Health Professional Education
+        </li>
+    	<li class="item item-checkbox">
+           <label class="checkbox">
+             <input type="checkbox" checked="" style="padding: 0px">
+           </label>
+           Medical Journal Publication
+        </li>
+    	<li class="item item-checkbox">
+           <label class="checkbox">
+             <input type="checkbox" checked="" style="padding: 0px">
+           </label>
+           Patient and Family Education
+        </li>
+
+    </ul>
 </div>

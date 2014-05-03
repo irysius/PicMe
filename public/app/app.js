@@ -7,10 +7,9 @@ var app = angular.module('picme', [
     'photos',
     'home'
  ])
-.controller('IndexCtrl', function($scope, layout, $ionicModal, $ionicSideMenuDelegate) {//, jsonDataContacts, contacts, jsonDataPresentations, presentations) {
-    //contacts.contacts = jsonDataContacts;
-    //contacts.sortByLastFirstName();
-
+.controller('IndexCtrl', function($scope, layout, $ionicModal, $ionicSideMenuDelegate, photos) {//, jsonDataContacts, contacts, jsonDataPresentations, presentations) {
+    photos.photos = [];
+    
     //presentations.presentations = jsonDataPresentations;
 
     $scope.layout = layout;
