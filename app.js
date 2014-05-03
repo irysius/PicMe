@@ -1,5 +1,6 @@
 var express = require('express');
 var http = require('http');
+var routes = require('./routes');
 
 // Connect/Express middleware
 var body_parser = require('body-parser');
@@ -18,20 +19,11 @@ app.use(compression());
 app.use(body_parser());
 app.use(method_override());
 
+// Setting up the routes
+routes.setupRoutes(app);
+
 // Catch All
 app.use(express.static(__dirname + '/public'));
-app.use(function (req, res, next) {
-    res.status(404);
-    if (req.accepts('html')) {
-        res.render('_shared/404');
-        return;
-    }
-    if (req.accepts('json')) {
-        res.send({ error: 'Not found' });
-        return;
-    }
-    res.type('txt').send('Not found');
-});
 app.use(errorhandler({ dumpExceptions: true, showStack: true }));
 
 // Start the server
