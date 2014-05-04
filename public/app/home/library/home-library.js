@@ -57,6 +57,9 @@ angular.module('home-library', [
 
     //$scope.photo = photos.getFromDb($stateParams.id);
     $scope.photo = photos.get($stateParams.id);
+    $scope.data = {
+      permissions: '0000'
+    };
 
     $scope.closeModal = function () {
         $scope.modal.hide();
@@ -73,13 +76,24 @@ angular.module('home-library', [
         
         $scope.modal.scope.item = item;
 
+        $scope.modal.scope.photo = $scope.photo;
+        $scope.modal.scope.data = $scope.data;
+        /*$scope.modal.scope.permissionRadios = [
+            { text: "Direct Clinical Care", value: "1000" },
+            { text: "Healthcare Professional Education", value: "0100" },
+            { text: "Patient and Family Education", value: "0010" },
+            { text: "SickKids Hackathon 2014", value: "0001" }
+          ];
+        */
+
         $scope.modal.scope.logUsage = function() {
           console.log('inusage');
           $http.post('/usage/create', {
               userid: 1,
               imageid: $scope.photo.id,
-              permissions: '1000'
+              permissions: $scope.data.permissions
             }).then(function (success) {
+                console.log('perm:' + $scope.data.permissions);
                 $scope.modal.hide();
               }, function (failure) {
             });

@@ -1,8 +1,29 @@
 <div class="modal menu_modal2">
+	Which of the approved usages do you intend to use the photo for?
+	<br />
+	<br />
+    <label class="item item-radio" ng-show="photo.permission.one">
+    	<input type="radio" name="group" ng-model="data.permissions" value="1000">
+    	<div class="item-content">Direct Clinical Care</div>
+    	<i class="radio-icon ion-checkmark"></i>
+  	</label>
+    <label class="item item-radio" ng-show="photo.permission.two">
+    	<input type="radio" name="group" ng-model="data.permissions" value="0100">
+    	<div class="item-content">Healthcare Professional Education</div>
+    	<i class="radio-icon ion-checkmark"></i>
+  	</label>
+    <label class="item item-radio" ng-show="photo.permission.three">
+    	<input type="radio" name="group" ng-model="data.permissions" value="0010">
+    	<div class="item-content">Patient and Family Education</div>
+    	<i class="radio-icon ion-checkmark"></i>
+  	</label>
+    <label class="item item-radio" ng-show="photo.permission.four">
+    	<input type="radio" name="group" ng-model="data.permissions" value="0001">
+    	<div class="item-content">SickKids Hackathon 2014</div>
+    	<i class="radio-icon ion-checkmark"></i>
+  	</label>
+    
     <ul>
-        <li>List out the possible options for permissions that the user has allowed</li>
-        <li>Let the doctor pick one and hit a download button</li>
-        <li>Log a usage of that photo, and send the photo to the doctor</li>
 	    <li>
 	    	<button class="button button-positive button-block" id="emailPhoto" ng-click="logUsage()">Email Photo</button>
 	    	<button class="button button-positive button-block" id="downloadPhoto" ng-click="logUsage()">Download Photo</button>
