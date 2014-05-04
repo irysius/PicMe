@@ -37,8 +37,10 @@
 
   <div style="width:50%;margin-top:70px;padding-left:10px; padding-right:10px;clear: both;">
   <br />
-  <h4>Usage History</h4>
-  <p style ="font-style: italic">Number of times used: {{usages.length}}</p>
+  <div class="bar bar-header bar-balanced" style="position:relative"> 
+    <h4 style="width:100%; text-align:center; color:white">Usage History</h4>
+  </div>
+  <p style ="font-style: italic; margin-top:2px;">Number of times used: {{usages.length}}</p>
     <ul class="list" ng-repeat="usage in usages">
       <li class="item">
 
