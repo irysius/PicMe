@@ -3,11 +3,13 @@
 angular.module('home-library', [
     ])
 
-.controller('LibraryCtrl', function($scope, $http, $state, $stateParams, layout, $ionicScrollDelegate, photos) {
+.controller('LibraryCtrl', function($scope, $http, $state, $stateParams, layout, $ionicScrollDelegate, $ionicSideMenuDelegate, photos) {
     layout.setHeaderTitle('Photo Library');
+    
+    $ionicSideMenuDelegate.toggleLeft(false);
 
     photos.clear();
-	$scope.photos = photos.getAll();
+	 $scope.photos = photos.getAll();
 
     //$scope.photos.getData(); 
 
