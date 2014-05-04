@@ -52,13 +52,46 @@ angular.module('home-library', [
 	});
 })
 
-.controller('PhotoDetailCtrl', function($scope, $http, $state, $stateParams, layout, $ionicScrollDelegate, photos) {
+.controller('PhotoDetailCtrl', function($scope, $http, $state, $stateParams, layout, $ionicScrollDelegate, $ionicModal, photos) {
     layout.setHeaderTitle('Photo Detail');
 
     //$scope.photo = photos.getFromDb($stateParams.id);
     $scope.photo = photos.get($stateParams.id);
-    console.log('photo' + $scope.photo.permission.one);
 
+    $scope.closeModal = function () {
+        $scope.modal.hide();
+    };
+
+    $ionicModal.fromTemplateUrl('app/home/library/downloadmodal.html', function(modal) {
+        $scope.modal = modal;
+    }, {
+        animation: 'slide-top'
+    });
+      
+    $scope.showModal = function(item) {
+        if (!$scope.modal) return;
+        
+        $scope.modal.scope.item = item;
+
+        $scope.modal.scope.logUsage = function() {
+          console.log('inusage');
+          $http.post('/usage/create', {
+              userid: 1,
+              imageid: $scope.photo.id,
+              permissions: '1000'
+            }).then(function (success) {
+                console.log('success usage');
+              }, function (failure) {
+            });
+        }
+        
+        $scope.modal.show();
+    };
+    
+    $scope.$on('$destroy', function()
+    {
+       $scope.modal.remove();
+    });    
 })
 
 .directive('photo', function($window) {

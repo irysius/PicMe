@@ -3,7 +3,7 @@
 angular.module('home-photo', [
     ])
 
-.controller('PhotoCtrl', function ($scope, $state, $stateParams, layout, $ionicScrollDelegate, photos, $http) {
+.controller('PhotoCtrl', function ($scope, $state, $stateParams, layout, $ionicScrollDelegate, $ionicModal, photos, $http) {
     layout.setHeaderTitle('Photo Release');
     $scope.physicianid = 3001;
     $scope.user = { username: '', email: '' };
@@ -48,9 +48,35 @@ angular.module('home-photo', [
                 userid: userid,
                 data: $scope.photo.data,
                 permissions: _permissions
+            }).then(function (success) {
+                $scope.showModal();
             });
         }, function (failure) {
         });
     };
+
+
+    $scope.closeModal = function () {
+        $scope.modal.hide();
+    };
+
+    $ionicModal.fromTemplateUrl('app/home/photo/confirmedmodal.html', function(modal) {
+        $scope.modal = modal;
+    }, {
+        animation: 'slide-top'
+    });
+      
+    $scope.showModal = function(item) {
+        if (!$scope.modal) return;
+        
+        $scope.modal.scope.item = item;
+
+        $scope.modal.show();
+    };
+    
+    $scope.$on('$destroy', function()
+    {
+       $scope.modal.remove();
+    });    
 })
 ;

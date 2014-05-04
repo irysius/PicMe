@@ -14,6 +14,23 @@
   max-height: 100%;
 }
 
+.menu_modal {
+  position: absolute;
+  top: 44px;
+  right: 0px;
+  left: auto;
+  width: 15%;
+  height: 120px;
+  min-height: 120px; }
+  .menu_modal ul li a {
+    display: block;
+    text-decoration: none;
+    color: #34a5c5;
+    padding: 10px 20px;
+    width: 100%; }
+    .menu_modal ul li a:hover {
+      background: #34a5c5;
+      color: white; }
 
 /*
   Ionicons, v1.4.1
@@ -7844,20 +7861,3 @@ body {
     vertical-align: text-top;
     margin: -10px 0 0 0; }
 
-.menu_modal {
-  position: absolute;
-  top: 44px;
-  right: 0px;
-  left: auto;
-  width: 15%;
-  height: 120px;
-  min-height: 120px; }
-  .menu_modal ul li a {
-    display: block;
-    text-decoration: none;
-    color: #34a5c5;
-    padding: 10px 20px;
-    width: 100%; }
-    .menu_modal ul li a:hover {
-      background: #34a5c5;
-      color: white; }
