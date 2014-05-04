@@ -6,23 +6,17 @@ angular.module('home-library', [
 .controller('LibraryCtrl', function($scope, $http, $state, $stateParams, layout, $ionicScrollDelegate, photos) {
     layout.setHeaderTitle('Photo Library');
 
-	//$scope.photos = photos.photos;
+	$scope.photos = photos.getAll();
 
-    $scope.photos = getData(); 
+    //$scope.photos.getData(); 
 
-	function getData() {
-        var a = [];
+	//function getData() {
+        //var a = [];
 
-        $http.get('/image').success(function (data) {
-        	console.log('data:' + data.data.length);
-        	for (var i = 0; i < data.data.length; i++) {
-        		var photo = { 'id': data.data[i].imageid, 'data': data.data[i].data };
-            	a.push(photo);            	
-        	}
-        });
+        
 
-        return a;
-      }
+       // return a;
+      //}
 
 
 	$scope.moreDataCanBeLoaded = false;
@@ -47,9 +41,23 @@ angular.module('home-library', [
 
 	};
 
+	$scope.loadPhoto = function(photo) {
+        $scope.selectedId = photo.id;
+        $state.go('home.photoDetail', {'id' : photo.id});
+    };
+
 	$scope.$on('stateChangeSuccess', function() {
 	    //$scope.loadMoreData();
 	});
+})
+
+.controller('PhotoDetailCtrl', function($scope, $http, $state, $stateParams, layout, $ionicScrollDelegate, photos) {
+    layout.setHeaderTitle('Photo Detail');
+
+    //$scope.photo = photos.getFromDb($stateParams.id);
+    $scope.photo = photos.get($stateParams.id);
+    console.log('photo' + $scope.photo.permission.one);
+
 })
 
 .directive('photo', function($window) {

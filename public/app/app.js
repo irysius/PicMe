@@ -69,6 +69,15 @@ var app = angular.module('picme', [
                 }
             }
         })
+        .state('home.photoDetail', {
+            url: 'photodetail/:id',
+            views: {
+                'mainContent': {
+                    templateUrl: 'app/home/library/detail.html',
+                    controller: 'PhotoDetailCtrl'
+                }
+            }
+        })
         
         $urlRouterProvider.otherwise("/");
         

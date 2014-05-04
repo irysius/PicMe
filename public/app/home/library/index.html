@@ -3,7 +3,7 @@
     <ion-list>
     <div id="photos" class="clearfix">
       <div class="photo" ng-repeat="photo in photos">
-        <img ng-src="{{ photo.data }}">
+        <img ng-src="{{ photo.data }}" ng-click="loadPhoto(photo)">
       </div>
     </div>
     </ion-list>            
