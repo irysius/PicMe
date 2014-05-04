@@ -75,21 +75,11 @@ angular.module('home-library', [
         if (!$scope.modal) return;
         
         $scope.modal.scope.item = item;
-<<<<<<< HEAD
 
         $scope.modal.scope.photo = $scope.photo;
-        $scope.modal.scope.data = $scope.data;
-        /*$scope.modal.scope.permissionRadios = [
-            { text: "Direct Clinical Care", value: "1000" },
-            { text: "Healthcare Professional Education", value: "0100" },
-            { text: "Patient and Family Education", value: "0010" },
-            { text: "SickKids Hackathon 2014", value: "0001" }
-          ];
-        */
-
-=======
         $scope.modal.scope.imagefile = $scope.photo.data.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
->>>>>>> 1d78664adf82166515fa1651a41d4188d6907131
+        $scope.modal.scope.data = $scope.data;
+
         $scope.modal.scope.logUsage = function() {
           console.log('inusage');
           $http.post('/usage/create', {
@@ -97,7 +87,6 @@ angular.module('home-library', [
               imageid: $scope.photo.id,
               permissions: $scope.data.permissions
             }).then(function (success) {
-                console.log('perm:' + $scope.data.permissions);
                 $scope.modal.hide();
               }, function (failure) {
             });
@@ -108,6 +97,7 @@ angular.module('home-library', [
               userid: 1,
               imageid: $scope.photo.id,
               permissions: '1000'
+              permissions: $scope.data.permissions
           })
           $http.post('/image/email', {
             email: 'lestersy@hotmail.com',
