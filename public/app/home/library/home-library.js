@@ -84,6 +84,21 @@ angular.module('home-library', [
               }, function (failure) {
             });
         }
+        $scope.modal.scope.emailImage = function () {
+          console.log('inemailimage');
+          $http.post('/usage/create', {
+              userid: 1,
+              imageid: $scope.photo.id,
+              permissions: '1000'
+          })
+          $http.post('/image/email', {
+            email: 'lestersy@hotmail.com',
+            imageid: $scope.photo.id
+          }).then(function (success) {
+            console.log('image emailed');
+            $scope.modal.hide();
+          })
+        }
         
         $scope.modal.show();
     };

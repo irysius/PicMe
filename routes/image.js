@@ -2,6 +2,8 @@ var express = require('express');
 var image = express.Router();
 var nodemailer = require('nodemailer');
 var database = require('./../model/database');
+var dataFolder = 'data/';
+var fs = require('fs');
 
 image.post('/create', function (req, res, next) {
 	var userid = parseInt(req.body.userid);
@@ -15,13 +17,7 @@ image.post('/create', function (req, res, next) {
 			console.log(userid);
 			console.log(result2);
 			//var transport = nodemailer.createTransport('Direct');
-			var transport = nodemailer.createTransport('SMTP', {
-				service: 'Gmail',
-				auth: {
-					user: 'pickmehhsickkids@gmail.com',
-					pass: 'pickme123'
-				}
-			})
+			
 			var mailOptions = {
 				from: 'pickmehhsickkids@gmail.com',
 				to: result2.data.email,
@@ -29,14 +25,34 @@ image.post('/create', function (req, res, next) {
 				text: 'You have just allowed a physician to use your picture for the following purposes...'
 			}
 			console.log(mailOptions);
-			transport.sendMail(mailOptions, function(error, responseStatus) {
-				console.log('mail return');
-				console.log(error);
-				console.log(responseStatus);
-			});
+			sendemail(mailOptions);
+			
 			res.json(result);
 		});
 	});
+})
+
+image.post('/email', function (req, res, next) {
+	var email = req.body.email;
+	var imageid = parseInt(req.body.imageid);
+
+	var rawData = fs.readFileSync(dataFolder + imageid + '.txt', 'utf8');
+
+	var mailOptions = {
+		from: 'pickmehhsickkids@gmail.com',
+		to: email,
+		subject: 'Medical Image Request',
+		text: 'Attached is the image you requested',
+		attachments: [
+			{
+				fileName: 'image.png',
+				contents: new Buffer(rawData.substring(22), 'base64')
+			}
+		]
+	}
+
+	console.log('attempting an image send');
+	sendemail(mailOptions);
 })
 
 image.get('/', function (req, res, next) {
@@ -54,5 +70,21 @@ image.get('/:imageid(\\d+)', function (req, res, next) {
 		res.json(result);
 	})
 })
+
+function sendemail(mailoptions) {
+	var transport = nodemailer.createTransport('SMTP', {
+		service: 'Gmail',
+		auth: {
+			user: 'pickmehhsickkids@gmail.com',
+			pass: 'pickme123'
+		}
+	})
+
+	transport.sendMail(mailoptions, function(error, responseStatus) {
+		console.log('mail return');
+		console.log(error);
+		console.log(responseStatus);
+	});
+}
 
 module.exports = image;
