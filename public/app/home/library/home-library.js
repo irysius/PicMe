@@ -9,61 +9,70 @@ angular.module('home-library', [
     $ionicSideMenuDelegate.toggleLeft(false);
 
     photos.clear();
+<<<<<<< HEAD
 	 $scope.photos = photos.getAll();
+=======
+    $scope.photos = photos.getAll();
+>>>>>>> 1f87ab359c689857d146a4d7e150cf98dd8f5f40
 
     //$scope.photos.getData(); 
 
-	//function getData() {
-        //var a = [];
-
-        
-
-       // return a;
-      //}
+    //function getData() {
+    //var a = [];
 
 
-	$scope.moreDataCanBeLoaded = false;
 
-	$scope.loadMoreData = function() {
-  	    //$http.get('/more-items').success(function(items) {
+    // return a;
+    //}
 
-			//for(var i=0, l=items.length; i < l; i++) {
-			//	$scope.photos.push(items[i]);
-			//}
 
-			for(var i= ($scope.photos.length + 1), l = $scope.photos.length; i < (l + 10); i++) {
-				$scope.photos.push(i);
-			}
+    $scope.moreDataCanBeLoaded = false;
 
-		    if ($scope.photos.length > 30) {
-		      	$scope.moreDataCanBeLoaded = false;
-		    }
+    $scope.loadMoreData = function() {
+        //$http.get('/more-items').success(function(items) {
 
-	    	$scope.$broadcast('scroll.infiniteScrollComplete');
-	    //});
+        //for(var i=0, l=items.length; i < l; i++) {
+        //	$scope.photos.push(items[i]);
+        //}
 
-	};
+        for (var i = ($scope.photos.length + 1), l = $scope.photos.length; i < (l + 10); i++) {
+            $scope.photos.push(i);
+        }
 
-	$scope.loadPhoto = function(photo) {
-        $scope.selectedId = photo.id;
-        $state.go('home.photoDetail', {'id' : photo.id});
+        if ($scope.photos.length > 30) {
+            $scope.moreDataCanBeLoaded = false;
+        }
+
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+        //});
+
     };
 
-	$scope.$on('stateChangeSuccess', function() {
-	    //$scope.loadMoreData();
-	});
+    $scope.loadPhoto = function(photo) {
+        $scope.selectedId = photo.id;
+        $state.go('home.photoDetail', {
+            'id': photo.id
+        });
+    };
+
+    $scope.$on('stateChangeSuccess', function() {
+        //$scope.loadMoreData();
+    });
 })
 
-.controller('PhotoDetailCtrl', function($scope, $http, $state, $stateParams, layout, $ionicScrollDelegate, $ionicModal, photos) {
+.controller('PhotoDetailCtrl', function($scope, $http, $state, $stateParams, layout, $ionicScrollDelegate, $ionicModal, photos, usages) {
     layout.setHeaderTitle('Photo Detail');
 
+    usages.get($stateParams.id, function(data) {
+        $scope.usages = data
+    });
     //$scope.photo = photos.getFromDb($stateParams.id);
     $scope.photo = photos.get($stateParams.id);
     $scope.data = {
       permissions: '0000'
     };
 
-    $scope.closeModal = function () {
+    $scope.closeModal = function() {
         $scope.modal.hide();
     };
 
@@ -72,10 +81,10 @@ angular.module('home-library', [
     }, {
         animation: 'slide-top'
     });
-      
+
     $scope.showModal = function(item) {
         if (!$scope.modal) return;
-        
+
         $scope.modal.scope.item = item;
 
         $scope.modal.scope.photo = $scope.photo;
@@ -90,8 +99,7 @@ angular.module('home-library', [
               permissions: $scope.data.permissions
             }).then(function (success) {
                 $scope.modal.hide();
-              }, function (failure) {
-            });
+            }, function(failure) {});
         }
         $scope.modal.scope.emailImage = function () {
           console.log('inemailimage');
@@ -111,20 +119,18 @@ angular.module('home-library', [
         
         $scope.modal.show();
     };
-    
-    $scope.$on('$destroy', function()
-    {
-       $scope.modal.remove();
-    });    
+
+    $scope.$on('$destroy', function() {
+        $scope.modal.remove();
+    });
 })
 
 .directive('photo', function($window) {
-  return {
-    restrict: 'C',
-    link: function($scope, $element, $attr) {
-      var size = ($window.outerWidth / 3) - 2;
-      $element.css('width', size + 'px');
+    return {
+        restrict: 'C',
+        link: function($scope, $element, $attr) {
+            var size = ($window.outerWidth / 3) - 2;
+            $element.css('width', size + 'px');
+        }
     }
-  }
-});
-;
+});;

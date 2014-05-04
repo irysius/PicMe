@@ -6,45 +6,45 @@ var app = angular.module('picme', [
     'layout',
     'photos',
     'home',
-    'hrefModule'
- ])
-.controller('IndexCtrl', function($scope, layout, $ionicModal, $ionicSideMenuDelegate, photos) {//, jsonDataContacts, contacts, jsonDataPresentations, presentations) {
-    photos.photos = [];
-    
-    //presentations.presentations = jsonDataPresentations;
+    'hrefModule',
+    'usages'
+])
+    .controller('IndexCtrl', function($scope, layout, $ionicModal, $ionicSideMenuDelegate, photos) { //, jsonDataContacts, contacts, jsonDataPresentations, presentations) {
+        photos.photos = [];
 
-    $scope.layout = layout;
+        //presentations.presentations = jsonDataPresentations;
 
-    $scope.showMenu = function() {
-        $ionicSideMenuDelegate.toggleLeft();
-    };
+        $scope.layout = layout;
 
-    $ionicModal.fromTemplateUrl('menumodal.html', function(modal) {
-        $scope.modal = modal;
-    }, {
-        animation: 'slide-left'
-    });
-      
-    $scope.showModal = function(item) {
-        if (!$scope.modal) return;
-        
-        $scope.modal.scope.item = item;
-        $scope.modal.show();
-    };
-    
-    $scope.$on('$destroy', function()
-    {
-       $scope.modal.remove();
-    });   
-})
-.controller('ModalCtrl', function($scope) {
-    $scope.closeModal = function () {
-        $scope.modal.hide();
-    };
-})
+        $scope.showMenu = function() {
+            $ionicSideMenuDelegate.toggleLeft();
+        };
+
+        $ionicModal.fromTemplateUrl('menumodal.html', function(modal) {
+            $scope.modal = modal;
+        }, {
+            animation: 'slide-left'
+        });
+
+        $scope.showModal = function(item) {
+            if (!$scope.modal) return;
+
+            $scope.modal.scope.item = item;
+            $scope.modal.show();
+        };
+
+        $scope.$on('$destroy', function() {
+            $scope.modal.remove();
+        });
+    })
+    .controller('ModalCtrl', function($scope) {
+        $scope.closeModal = function() {
+            $scope.modal.hide();
+        };
+    })
 
 
-.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
     $stateProvider
         .state('home', {
@@ -52,15 +52,15 @@ var app = angular.module('picme', [
             templateUrl: 'app/home/index.html'
         })
 
-        .state('home.photo', {
-            url: 'photo',
-            views: {
-                'mainContent': {
-                    templateUrl: 'app/home/photo/accept.html',
-                    controller: 'PhotoCtrl'
-                }
+    .state('home.photo', {
+        url: 'photo',
+        views: {
+            'mainContent': {
+                templateUrl: 'app/home/photo/accept.html',
+                controller: 'PhotoCtrl'
             }
-        })
+        }
+    })
         .state('home.library', {
             url: 'library',
             views: {
@@ -79,24 +79,24 @@ var app = angular.module('picme', [
                 }
             }
         })
-        
-        $urlRouterProvider.otherwise("/");
-        
-        $locationProvider.html5Mode(true);
+
+    $urlRouterProvider.otherwise("/");
+
+    $locationProvider.html5Mode(true);
 })
 
 .filter('getById', function() {
-  return function(input, id) {
-    var i=0, len=input.length;
-    for (; i<len; i++) {
-      if (+input[i].id == +id) {
-        return input[i];
-      }
-    }
-    return null;
-  };
-})
-;
+    return function(input, id) {
+        var i = 0,
+            len = input.length;
+        for (; i < len; i++) {
+            if (+input[i].id == +id) {
+                return input[i];
+            }
+        }
+        return null;
+    };
+});
 
 //Load all data from the json file before bootstrapping the app.
 angular.element(document).ready(
@@ -110,16 +110,16 @@ angular.element(document).ready(
         //     $http.get('assets/data/presentations.js').then(
         //         function(response2) {
         //             app.constant('jsonDataPresentations', response2.data);
-                    angular.bootstrap(document, ['picme']);
-            //     }
-            // );
+        angular.bootstrap(document, ['picme']);
+        //     }
+        // );
         //}
-    //);
-	}
+        //);
+    }
 );
 
-angular.module('hrefModule', [], function ($compileProvider) {
+angular.module('hrefModule', [], function($compileProvider) {
 
-  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|data):/);
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|data):/);
 
 });
