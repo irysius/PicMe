@@ -5,8 +5,9 @@ angular.module('home', [
 	'home-photo'
 ])
 .controller('HomeCtrl', function($scope, $state, layout, $ionicScrollDelegate, photos) {
-    layout.setHeaderTitle('Home');
+    layout.setHeaderTitle('Pic Me!');
     photos.clear();
+
 
     var _video = null,
     	patData = null;
