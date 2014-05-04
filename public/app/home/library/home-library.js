@@ -80,7 +80,7 @@ angular.module('home-library', [
               imageid: $scope.photo.id,
               permissions: '1000'
             }).then(function (success) {
-                console.log('success usage');
+                $scope.modal.hide();
               }, function (failure) {
             });
         }
