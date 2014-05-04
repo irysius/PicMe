@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('home-library', [])
+angular.module('home-library', [
+    ])
 
 .controller('LibraryCtrl', function($scope, $http, $state, $stateParams, layout, $ionicScrollDelegate, photos) {
     layout.setHeaderTitle('Photo Library');
@@ -61,6 +62,9 @@ angular.module('home-library', [])
     });
     //$scope.photo = photos.getFromDb($stateParams.id);
     $scope.photo = photos.get($stateParams.id);
+    $scope.data = {
+      permissions: '0000'
+    };
 
     $scope.closeModal = function() {
         $scope.modal.hide();
@@ -76,18 +80,37 @@ angular.module('home-library', [])
         if (!$scope.modal) return;
 
         $scope.modal.scope.item = item;
+
+        $scope.modal.scope.photo = $scope.photo;
         $scope.modal.scope.imagefile = $scope.photo.data.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+        $scope.modal.scope.data = $scope.data;
+
         $scope.modal.scope.logUsage = function() {
-            console.log('inusage');
-            $http.post('/usage/create', {
-                userid: 1,
-                imageid: $scope.photo.id,
-                permissions: '1000'
-            }).then(function(success) {
+          console.log('inusage');
+          $http.post('/usage/create', {
+              userid: 1,
+              imageid: $scope.photo.id,
+              permissions: $scope.data.permissions
+            }).then(function (success) {
                 $scope.modal.hide();
             }, function(failure) {});
         }
-
+        $scope.modal.scope.emailImage = function () {
+          console.log('inemailimage');
+          $http.post('/usage/create', {
+              userid: 1,
+              imageid: $scope.photo.id,
+              permissions: $scope.data.permissions
+          })
+          $http.post('/image/email', {
+            email: 'lestersy@hotmail.com',
+            imageid: $scope.photo.id
+          }).then(function (success) {
+            console.log('image emailed');
+            $scope.modal.hide();
+          })
+        }
+        
         $scope.modal.show();
     };
 
