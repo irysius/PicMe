@@ -75,6 +75,7 @@ angular.module('home-library', [
         if (!$scope.modal) return;
         
         $scope.modal.scope.item = item;
+<<<<<<< HEAD
 
         $scope.modal.scope.photo = $scope.photo;
         $scope.modal.scope.data = $scope.data;
@@ -86,6 +87,9 @@ angular.module('home-library', [
           ];
         */
 
+=======
+        $scope.modal.scope.imagefile = $scope.photo.data.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+>>>>>>> 1d78664adf82166515fa1651a41d4188d6907131
         $scope.modal.scope.logUsage = function() {
           console.log('inusage');
           $http.post('/usage/create', {
@@ -97,6 +101,21 @@ angular.module('home-library', [
                 $scope.modal.hide();
               }, function (failure) {
             });
+        }
+        $scope.modal.scope.emailImage = function () {
+          console.log('inemailimage');
+          $http.post('/usage/create', {
+              userid: 1,
+              imageid: $scope.photo.id,
+              permissions: '1000'
+          })
+          $http.post('/image/email', {
+            email: 'lestersy@hotmail.com',
+            imageid: $scope.photo.id
+          }).then(function (success) {
+            console.log('image emailed');
+            $scope.modal.hide();
+          })
         }
         
         $scope.modal.show();

@@ -212,6 +212,21 @@ var database = {
 				callback({ result: rows.affectedRows > 0 });
 			}
 		})
+	},
+	getUsages: function (imageid, callback) {
+		var query = 'SELECT * FROM `usage` ' + 
+			'WHERE imageid = ? ';
+
+		connection.query(query, [imageid], function (err, rows) {
+			if (!!err) {
+				console.log('getUsages');
+				console.log(err);
+				callback({ result: false, error: err });
+			} else {
+				console.log('getUsages', rows.affectedRows);
+				callback({ result: true, data: rows });
+			}
+		})
 	}
 
 }
