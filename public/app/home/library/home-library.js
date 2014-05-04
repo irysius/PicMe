@@ -96,7 +96,6 @@ angular.module('home-library', [
           $http.post('/usage/create', {
               userid: 1,
               imageid: $scope.photo.id,
-              permissions: '1000'
               permissions: $scope.data.permissions
           })
           $http.post('/image/email', {
