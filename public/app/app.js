@@ -5,7 +5,8 @@ var app = angular.module('picme', [
     'webcam',
     'layout',
     'photos',
-    'home'
+    'home',
+    'hrefModule'
  ])
 .controller('IndexCtrl', function($scope, layout, $ionicModal, $ionicSideMenuDelegate, photos) {//, jsonDataContacts, contacts, jsonDataPresentations, presentations) {
     photos.photos = [];
@@ -116,3 +117,9 @@ angular.element(document).ready(
     //);
 	}
 );
+
+angular.module('hrefModule', [], function ($compileProvider) {
+
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|data):/);
+
+});
