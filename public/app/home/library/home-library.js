@@ -9,11 +9,8 @@ angular.module('home-library', [
     $ionicSideMenuDelegate.toggleLeft(false);
 
     photos.clear();
-<<<<<<< HEAD
-	 $scope.photos = photos.getAll();
-=======
+
     $scope.photos = photos.getAll();
->>>>>>> 1f87ab359c689857d146a4d7e150cf98dd8f5f40
 
     //$scope.photos.getData(); 
 
