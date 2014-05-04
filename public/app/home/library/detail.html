@@ -43,8 +43,12 @@
   <p style ="font-style: italic; margin-top:2px;">Number of times used: {{usages.length}}</p>
     <ul class="list" ng-repeat="usage in usages">
       <li class="item">
-
-        <span style="width: 50%; float:left">Date: {{ usage.created | date: formatted }}</span><span style="width: 50%; float:right">Direct Clincal Care</span>
+        <span style="width: 50%; float:left">Date: {{ usage.created | date: formatted }}</span>
+        <p>{{usage.permissions}}</p>
+        <span ng-if="usage.permissions == 1000" style="width: 50%; float:right">Direct Clinical Care</span>
+        <span ng-if="usage.permissions == 0100" style="width: 50%; float:right">Healthcare Professional Education</span>
+        <span ng-if="usage.permissions == 0010" style="width: 50%; float:right">Patient and Family Education</span>
+        <span ng-if="usage.permissions == 0001" style="width: 50%; float:right">SickKids Hackathon 2014</span>
       <li>
     </ul>
 </div>
