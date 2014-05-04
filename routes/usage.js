@@ -1,5 +1,6 @@
 var express = require('express');
 var database = require('./../model/database');
+var nodemailer = require('nodemailer');
 var usage = new express.Router();
 
 usage.post('/create', function (req, res, next) {
@@ -23,7 +24,7 @@ usage.post('/create', function (req, res, next) {
 					if (result3.result) {
 						var email = result3.data.email;
 						console.log('emailing');
-						//email(email);
+						sendemail(email);
 					}
 				})
 			}
@@ -41,8 +42,8 @@ usage.get('/:imageid(\\d+)', function (req, res, next) {
 	})
 })
 
-function email(email) {
-	var transport = nodemailer.createTransport({
+function sendemail(email) {
+	var transport = nodemailer.createTransport('SMTP', {
 		service: 'Gmail',
 		auth: {
 			user: 'pickmehhsickkids@gmail.com',
@@ -55,8 +56,9 @@ function email(email) {
 		subject: 'Medical Image Usage',
 		text: 'Your physician xyz just used your image for the following purposes'
 	}
-	transport.sendMail(sendOptions, function (err, status) {
-
+	transport.sendMail(mailOptions, function (err, status) {
+		console.log(err);
+		console.log(status);
 	});
 }
 
