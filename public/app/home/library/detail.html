@@ -34,10 +34,18 @@
 </div>
 
 <div style="clear: both;">
+
+  <div style="width:50%;margin-top:70px;padding-left:10px; padding-right:10px;clear: both;">
   <br />
-  <h2>Usage History</h2>
-   <header ng-repeat="usage in usages">
-    Usage ID {{ usage.usageid }}
-  </header>
+  <h4>Usage History</h4>
+  <p style ="font-style: italic">Number of times used: {{usages.length}}</p>
+    <ul class="list" ng-repeat="usage in usages">
+      <li class="item">
+
+        <span style="width: 50%; float:left">Date: {{ usage.created | date: formatted }}</span><span style="width: 50%; float:right">Direct Clincal Care</span>
+      <li>
+    </ul>
+</div>
+
 </div>
 
