@@ -1,6 +1,6 @@
 var mysql = require('mysql');
 var fs = require('fs');
-var connectionString = 'mysql://root@localhost/mypic';
+var connectionString = 'mysql://mypic:mypic123@localhost/mypic';
 var connection = mysql.createConnection(connectionString);
 var dataFolder = 'data/';
 
