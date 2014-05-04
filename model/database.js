@@ -193,7 +193,8 @@ var database = {
 		return { result: false };
 	},
 	createUsage: function (userid, imageid, permissions, callback) {
-		var query = 'INSERT INTO usage ' + 
+		console.log(userid, imageid, permissions);
+		var query = 'INSERT INTO `usage` ' + 
 			'(userid, imageid, permissions) ' + 
 			'VALUES (?, ?, ?) ';
 
