@@ -6,8 +6,8 @@ angular.module('home-photo', [
 .controller('PhotoCtrl', function ($scope, $state, $stateParams, layout, $ionicScrollDelegate, photos, $http) {
     layout.setHeaderTitle('Photo Release');
     $scope.physicianid = 3001;
-    $scope.user = { username: 'user', email: 'email' };
-    $scope.permissions = { one: true, two: true, three: true, four: true };
+    $scope.user = { username: '', email: '' };
+    $scope.permissions = { one: false, two: false, three: false, four: false };
     if ($stateParams.id > 0) {
         console.log('sdf');
         $scope.photo = photos.get($stateParams.id);

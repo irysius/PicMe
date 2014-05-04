@@ -1,39 +1,44 @@
-<br /><br /><br /><br />
-
-<div style="float: left; width: 320px">
-	<canvas id="snapshot" width="320px" height="240px"></canvas>
-</div>
-<div style="float:left">
-    <br /><br />
-    Email: <input type="text" ng-model="user.email" />
-    <br /><br />
-    User Name: <input type="text" ng-model="user.username" />
-    <br />
+<div style="width:100%;margin-top:70px;padding-left:10px; padding-right:10px;">
+  <div style="width: 50%; float:left;">
+    <h2>Patient Approval</h2>
+    <div class="list">
+      <label class="item item-input">
+        <input type="text" placeholder="Email" ng-model="user.email" />
+      </label>
+      <label class="item item-input">
+        <input type="text" placeholder="User Name" ng-model="user.username" />
+      </label>
+    </div>
     <ul class="list">
-    	<li class="item item-checkbox">
+      <li class="item item-checkbox">
            <label class="checkbox">
              <input type="checkbox" checked="permission.one" style="padding: 0px">
            </label>
            Direct Clinical Care
         </li>
-    	<li class="item item-checkbox">
+      <li class="item item-checkbox">
            <label class="checkbox">
              <input type="checkbox" checked="permission.two" style="padding: 0px">
            </label>
            Health Professional Education
         </li>
-    	<li class="item item-checkbox">
+      <li class="item item-checkbox">
            <label class="checkbox">
              <input type="checkbox" checked="permission.three" style="padding: 0px">
            </label>
            Medical Journal Publication
         </li>
-    	<li class="item item-checkbox">
+      <li class="item item-checkbox">
            <label class="checkbox">
              <input type="checkbox" checked="permission.four" style="padding: 0px">
            </label>
            Patient and Family Education
         </li>
     </ul>
-    <button class="button button-positive" id="allow" ng-click="savePhoto()">Allow</button>
+    <button class="button button-positive button-block" id="allow" ng-click="savePhoto()">Allow</button>
+  </div>
+  <div style="width: 50%; float:right; text-align:center;">
+    <canvas id="snapshot" width="320px" height="240px" style="margin:autp;"></canvas>
+  </div>
 </div>
+
