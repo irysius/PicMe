@@ -70,6 +70,10 @@ angular.module('home-photo', [
         if (!$scope.modal) return;
         
         $scope.modal.scope.item = item;
+    
+        $scope.modal.scope.closeModal = function () {
+            $scope.modal.hide();
+        };
 
         $scope.modal.show();
     };
