@@ -72,7 +72,7 @@ angular.module('home-library', [
         if (!$scope.modal) return;
         
         $scope.modal.scope.item = item;
-
+        $scope.modal.scope.imagefile = $scope.photo.data.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
         $scope.modal.scope.logUsage = function() {
           console.log('inusage');
           $http.post('/usage/create', {

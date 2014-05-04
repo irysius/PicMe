@@ -5,7 +5,7 @@
         <li>Log a usage of that photo, and send the photo to the doctor</li>
 	    <li>
 	    	<button class="button button-positive button-block" id="emailPhoto" ng-click="logUsage()">Email Photo</button>
-	    	<button class="button button-positive button-block" id="downloadPhoto" ng-click="logUsage()">Download Photo</button>
+	    	<a download="download.png" ng-href="{{imagefile}}" class="button button-positive button-block" id="downloadPhoto" ng-click="logUsage()">Download Photo</a>
 	    </li>
     </ul>
 <div>
