@@ -6,6 +6,7 @@ angular.module('home-library', [
 .controller('LibraryCtrl', function($scope, $http, $state, $stateParams, layout, $ionicScrollDelegate, photos) {
     layout.setHeaderTitle('Photo Library');
 
+    photos.clear();
 	$scope.photos = photos.getAll();
 
     //$scope.photos.getData(); 

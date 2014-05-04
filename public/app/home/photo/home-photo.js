@@ -39,10 +39,10 @@ angular.module('home-photo', [
             console.log(success);
             console.log($scope.photo.data);
             var _permissions = '';
-            _permissions += $scope.permissions.one ? '1' : '0';
-            _permissions += $scope.permissions.two ? '1' : '0';
-            _permissions += $scope.permissions.three ? '1' : '0';
-            _permissions += $scope.permissions.four ? '1' : '0';
+            _permissions += $scope.permission.one ? '1' : '0';
+            _permissions += $scope.permission.two ? '1' : '0';
+            _permissions += $scope.permission.three ? '1' : '0';
+            _permissions += $scope.permission.four ? '1' : '0';
             $http.post('/image/create', {
                 physicianid: $scope.physicianid,
                 userid: userid,

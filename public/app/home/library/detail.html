@@ -1,34 +1,40 @@
-<div>
-<br /><br /><br />
-
-<img ng-src="{{ photo.data }}">
-<br />
-dd{{ photo.permission.two }}
-<br />
-<ul class="list">
+<div style="width:100%;margin-top:70px;padding-left:10px; padding-right:10px;">
+  <div style="width: 50%; float:left;">
+    <button class="button button-positive button-block" id="download" ng-click="download()">Download</button>
+    <ul class="list">
     	<li class="item item-checkbox">
            <label class="checkbox">
-             <input type="checkbox" ng-model="photo.permission.one" style="padding: 0px">
+             <input type="checkbox" ng-checked="photo.permission.one" style="padding: 0px">
            </label>
            Direct Clinical Care
         </li>
     	<li class="item item-checkbox">
            <label class="checkbox">
-             <input type="checkbox" ng-model="photo.permission.two" style="padding: 0px">
+             <input type="checkbox" ng-checked="photo.permission.two" style="padding: 0px">
            </label>
            Healthcare Professional Education
         </li>
     	<li class="item item-checkbox">
            <label class="checkbox">
-             <input type="checkbox" ng-model="photo.permission.three" style="padding: 0px">
+             <input type="checkbox" ng-checked="photo.permission.three" style="padding: 0px">
            </label>
            Medical Journal Publication
         </li>
     	<li class="item item-checkbox">
            <label class="checkbox">
-             <input type="checkbox" ng-model="photo.permission.four" style="padding: 0px">
+             <input type="checkbox" ng-checked="photo.permission.four" style="padding: 0px">
            </label>
            Patient and Family Education
         </li>
     </ul>
+  </div>
+  <div style="width: 50%; float:right; text-align:center;">
+    <img ng-src="{{ photo.data }}">
+  </div>
 </div>
+
+<div style="clear: both;">
+  <br />
+  <h2>Usage History</h2>
+</div>
+
